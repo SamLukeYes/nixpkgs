@@ -16,14 +16,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "waydroid";
-  version = "1.3.0";
+  version = "1.3.3";
   format = "other";
 
   src = fetchFromGitHub {
     owner = pname;
     repo = pname;
     rev = version;
-    sha256 = "sha256-6osDGYyFuyPDeK1QFowh414j3laD8i4bqPgCeJmsszE=";
+    hash = "sha256-av1kcOSViUV2jsFiTE21N6sAJIL6K+zKkpPHjx6iYVk=";
   };
 
   propagatedBuildInputs = with python3Packages; [
@@ -38,7 +38,7 @@ python3Packages.buildPythonApplication rec {
   dontWrapPythonPrograms = true;
 
   installPhase = ''
-    make install DESTDIR=$out PREFIX= USE_SYSTEMD=0 USE_NFTABLES=1
+    make install PREFIX=$out USE_SYSTEMD=0 USE_NFTABLES=1
 
     wrapProgram $out/lib/waydroid/data/scripts/waydroid-net.sh \
        --prefix PATH ":" ${lib.makeBinPath [ dnsmasq getent iproute2 nftables ]}
