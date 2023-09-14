@@ -7,6 +7,7 @@
 , util-linux
 , nix
 , lib
+, nix-output-monitor
 , nixosTests
 , installShellFiles
 }:
@@ -22,7 +23,7 @@ substituteAll {
   nix_x86_64_linux = fallback.x86_64-linux;
   nix_i686_linux = fallback.i686-linux;
   nix_aarch64_linux = fallback.aarch64-linux;
-  path = lib.makeBinPath [ coreutils gnused gnugrep jq util-linux ];
+  path = lib.makeBinPath [ coreutils gnused gnugrep jq util-linux nix-output-monitor ];
   nativeBuildInputs = [
     installShellFiles
   ];
